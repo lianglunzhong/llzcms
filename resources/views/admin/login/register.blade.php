@@ -124,7 +124,7 @@
                                 <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
                                     Register
                                 </button>
-                                <a class="btn btn-link" href="{{ url('/admin/login') }}">
+                                <a class="btn btn-link" href="/admin/login" target="_self">
                                     Login
                                 </a>
                             </div>

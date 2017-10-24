@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserRoles;
 
 class UserController extends Controller
 {
@@ -49,5 +50,38 @@ class UserController extends Controller
     	}
     	
     	return response()->json(['msg' => 'email is not exists.'], 422);
+    }
+
+
+    /**
+     * 新增用户
+     * @return [type] [<description>]
+     * @author llz 2017/10/24 <[<email address>]>
+     */
+    public function create(Request $request)
+    {
+        //数据验证
+        $this->validate($request, [
+            'name'      => 'required|min:2|max:16|unique:users',
+            'email'     => 'required|email|max:255|unique:users',
+        ]);
+
+        $data = $request->all();
+
+        $user = new User;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = password_hash('111111', PASSWORD_BCRYPT);
+        //验证密码时使用：password_verify($password, $hashedValue)
+
+        if($user->save())
+        {   
+            $role = isset($data['role']) ? $data['role'] : 1;
+            $user->userRole()->save(new UserRoles(['role' => $role]));
+            
+            return response()->json(['msg' => 'User successfully Created']);
+        } 
+
+        return response()->json(['msg' => 'Create user failed'], 422);
     }
 }

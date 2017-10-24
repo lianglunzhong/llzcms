@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function index()
     {
 
-    	if(Auth::check() && Auth::user()->UserRoles->role >= 2)
+    	if(Auth::check() && Auth::user()->UserRole->role >= 1)
     	{
     		return redirect('/admin/dashboard');
     	}
@@ -95,18 +95,15 @@ class LoginController extends Controller
 
         if($user->save())
         {   
-            $user->userRole()->save(new UserRoles(['role' => 2]));
-            $result['status'] = 1;
-            $result['msg'] = '注册成功！';
-        } else {
-            $result['status'] = 0;
-            $result['msg'] = '注册失败！';
+            //用户角色
+            $user->userRole()->save(new UserRoles(['role' => 1]));
+
+            //注册时记住登录信息
+            Auth::guard()->login($user);
+            return response()->json(['msg' => 'success']);
         }
 
-        //注册时记住登录信息
-        Auth::guard()->login($user);
-
-    	return response()->json($result);
+        return response()->json(['msg' => 'fail'], 422);
     }
 
 

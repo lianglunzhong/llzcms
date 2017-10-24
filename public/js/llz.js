@@ -7,7 +7,7 @@ var llz = angular.module('llzApp', ['ui.router']);
 llz.config(['$interpolateProvider', '$stateProvider', '$urlRouterProvider','$locationProvider',
 	function($interpolateProvider, $stateProvider, $urlRouterProvider, $locationProvider)
 	{
-		// $urlRouterProvider.otherwise('/');
+		// $urlRouterProvider.otherwise('/admin/404');
 
 		$stateProvider
 		.state('test', {

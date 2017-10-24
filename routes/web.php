@@ -40,7 +40,10 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::post('/email-exist-check', 'Admin\UserController@emailExistCheck');
 	});
 
-	Route::group(['middleware' => 'role:2'], function() {
+	Route::group(['middleware' => 'role:1'], function() {
+		//退出登录
+		Route::get('/logout', 'Admin\LoginController@logout');
+		
 		//匹配angularjs中的路由
 		Route::get('/views/{name}', function($name) {
 			return view($name);
@@ -51,10 +54,6 @@ Route::group(['prefix' => 'admin'], function() {
 		Route::get('{path?}', function() {
 			return view('admin.layouts.master');
 		})->where('path', ".+");
-		
-
-		//退出登录
-		Route::get('/logout', 'Admin\LoginController@logout');
 	});
 
 });

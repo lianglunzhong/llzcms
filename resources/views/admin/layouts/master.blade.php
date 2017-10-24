@@ -38,7 +38,7 @@
                                 <a href="">Profile</a>
                             </li>
                             <li>
-                                <a href="/admin/logout">Logout</a>
+                                <a href="/admin/logout" target="_self">Logout</a>
                             </li>
                         </ul>
                     </li>
