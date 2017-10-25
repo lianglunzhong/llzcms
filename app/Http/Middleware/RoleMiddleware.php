@@ -14,9 +14,8 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $role = 1)
     {   
-        dd(Auth::check());
         if(Auth::check() && Auth::user()->userRole->role >= $role)
         {
             return $next($request);

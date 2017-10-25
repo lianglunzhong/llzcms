@@ -44,4 +44,17 @@ llz.config(['$interpolateProvider', '$stateProvider', '$urlRouterProvider','$loc
 
 		$locationProvider.html5Mode(true);
 	}
-])
+]);
+
+
+
+/**
+ * 过滤器
+ */
+llz.filter('roles', function() {
+	return function(role) {
+		//1:普通人员  2：管理员  3：超级管理员
+		var roleWords = ['', 'Auth', 'Admin', 'Super Admin'];
+		return roleWords[role];
+	}
+});

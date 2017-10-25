@@ -84,4 +84,16 @@ class UserController extends Controller
 
         return response()->json(['msg' => 'Create user failed'], 422);
     }
+
+
+    /**
+     * 获取用户列表  -- 带分页
+     * @return [type] [<description>]
+     * @author llz 2017/10/25 <[<email address>]>
+     */
+    public function getUsers(Request $request)
+    {
+        $users = User::with('userRole')->orderBy('users.created_at', 'desc')->paginate(5);
+        return $users;
+    }
 }

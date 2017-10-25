@@ -18,13 +18,15 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::group(['prifix' => 'api', 'middleware' => 'role:1'], function() {
+Route::group(['prifix' => 'api'], function() {
 	Route::get('/test', function() {
 		return "<h1 style='text-align: center; margin-top: 4em;'>Api test</h1>";;
 	});
 
-	Route::group(['prefix' => 'users'], function() {
+	Route::group(['prefix' => 'user'], function() {
 		//新增用户
 		Route::post('/create', 'Admin\UserController@create');
+		//获取用户列表
+		Route::post('/getUsers', 'Admin\UserController@getUsers');
 	});
 });

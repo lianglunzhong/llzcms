@@ -62,18 +62,26 @@ llz.controller('dashboardController', ['$scope', function($scope)
 /**
  * user控制器
  */
-llz.controller('userController', ['$scope', '$http', '$window', 'UserService', function($scope, $http, $window, UserService)
+llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', '$location', 'UserService', function($scope, $http, $window, $stateParams, $location, UserService)
 {
 	$scope.ready = true;
-	//所有的用户
+
+	//当前页的所有用户
 	$scope.users = {};
+	//用户分页
+	$scope.pages = {}
+	//监听服务users，当服务中的用户数据发生变化时，该控制器中的users也要跟着更新
+	$scope.$on('users', function(e, users){
+		$scope.users = UserService.users;
+	});
+
 	//新增或编辑时的错误数据
 	$scope.errors = false;
 	//新增用户时候的数据保存
 	$scope.create_data = {};
 	//新增用户
 	$scope.create = function() {
-		$http.post('/api/users/create', $scope.create_data)
+		$http.post('/api/user/create', $scope.create_data)
 			.then(function(res) {
 				$window.location.href = '/admin/users/lists';
 			}, function(res) {

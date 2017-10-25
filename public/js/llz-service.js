@@ -1,11 +1,13 @@
 /**
  * 用户服务
  */
-llz.service('UserService', ['$http', function($http) {
+llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 	var userService = {};
 
 	//用户列表
 	userService.users = {};
+	//用户分页
+	userService.pages = {};
 	//单个用户
 	userService.user = {};
 	//当前登录用户
@@ -40,6 +42,36 @@ llz.service('UserService', ['$http', function($http) {
 				userService.email_exist = true;
 			}, function(res) {
 				userService.email_exist = false;
+			})
+	}
+
+	//获取用户列表数据
+	userService.getUsers = function(page=1) {
+		$http.post('/api/user/getUsers?page='+page)
+			.then(function(res) {
+				if(res.data) {
+					userService.users = res.data.data;
+					//广播事件，即：当服务中的uers发生改变是，通知下级需要更新，下级使用$on监听;
+					$rootScope.$broadcast('users', userService.users);
+				}
+				console.log(res);
+			})
+	}
+
+	//获取用户列表数据
+	userService.getPages = function(page=1) {
+		return $http.post('/api/user/getUsers?page='+page)
+			.then(function(res) {
+				if(res.data) {
+					//当前页
+					userService.pages['current_page'] = res.data.current_page;
+					//每页显示数量
+					userService.pages['per_page'] = res.data.per_page;
+					//用户总数
+					userService.pages['total'] = res.data.total;
+
+					return userService.pages;
+				}
 			})
 	}
 

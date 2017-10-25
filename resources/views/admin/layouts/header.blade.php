@@ -14,6 +14,7 @@
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/admin/css/dep.css"/>
     <link rel="stylesheet" href="/admin/css/app.min.css"> -->
+    <link href="/admin/layui/css/layui.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/llz.css" rel="stylesheet">
 

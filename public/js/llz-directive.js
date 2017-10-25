@@ -101,4 +101,44 @@ llz.directive('pageLoading', function()
 		scope: {},
 		template: '<div class="preloader"><img src="/admin/images/main/preloader.gif" alt="preloader gif"></div>'
 	}
-})
+});
+
+
+/**
+ * 分页
+ */
+llz.directive('userpage', function($location, $stateParams, UserService)
+{
+	return {
+		restrict: 'AE',
+		template: '<div id="userpage"></div>',
+		link: function($scope, ele, attrs, ctrl) {
+			//通过UserService服务获取分页数据
+			var page = $location.search().page;
+			if(!page) {
+				page = 1;
+			}
+			UserService.getPages(page).then(function(pages) {
+				$scope.pages = pages;
+				layui.use('laypage', function(){
+					var laypage = layui.laypage;
+					//执行一个laypage实例
+					laypage.render({
+						elem: 'userpage', //注意，这里的 test1 是 ID，不用加 # 号
+						count: $scope.pages.total, //数据总数，从服务端得到
+						groups: 2,  //连续出现的页码个数
+						limit:$scope.pages.per_page,  //每页显示的条数
+						curr:$scope.pages.current_page,  //起始页。一般用于刷新类型的跳页以及HASH跳页
+						jump: function(obj){  //点击分页时的回调函数
+							//改变url参数，但不刷新页面
+							$location.search('page', obj.curr)
+
+							//获取当前分页的用户
+					      	UserService.getUsers(obj.curr);
+					    }
+					});
+				});
+			})
+		}
+	}
+});

@@ -25,26 +25,15 @@
             				</tr>
             			</thead>
             			<tbody>
-            				<tr>
-            					<td>John Doe</td>
-            					<td>Not Auth</td>
-            					<td>notauth@gmail.com</td>
-            					<td>编辑、删除</td>
-            				</tr>
-            				<tr>
-            					<td>John Doe</td>
-            					<td>Not Auth</td>
-            					<td>notauth@gmail.com</td>
-            					<td>编辑、删除</td>
-            				</tr>
-            				<tr>
-            					<td>John Doe</td>
-            					<td>Not Auth</td>
-            					<td>notauth@gmail.com</td>
+            				<tr ng-repeat="user in users">
+            					<td ng-bind="user.name"></td>
+            					<td ng-bind="user.user_role.role | roles"></td>
+            					<td ng-bind="user.email"></td>
             					<td>编辑、删除</td>
             				</tr>
             			</tbody>
 					</table>
+					<userpage></userpage>
             	</div>
             </div>
 		</div>
