@@ -49,16 +49,18 @@
 
     <div class="sidebar">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active">
+            <li role="presentation" ng-class="{active: mainUrl == 'dashboard'}">
                 <a ui-sref="dashboard">Dashboard</a>
             </li>
-            <li role="presentation">
+            <li role="presentation" ng-class="{active: mainUrl == 'users'}">
                 <a ui-sref="users.lists">Users</a>
             </li>
-            <li role="presentation">
+            <li role="presentation" ng-class="{active: mainUrl == 'posts'}">
                 <a >Post</a>
             </li>
-            <li role="presentation"><a href="#">Gallery</a></li>
+            <li role="presentation">
+                <a href="#">Gallery</a>
+            </li>
         </ul>
     </div>
 

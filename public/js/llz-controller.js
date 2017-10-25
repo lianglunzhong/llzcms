@@ -64,8 +64,6 @@ llz.controller('dashboardController', ['$scope', function($scope)
  */
 llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', '$location', 'UserService', function($scope, $http, $window, $stateParams, $location, UserService)
 {
-	$scope.ready = true;
-
 	//当前页的所有用户
 	$scope.users = {};
 	//用户分页
@@ -73,6 +71,7 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 	//监听服务users，当服务中的用户数据发生变化时，该控制器中的users也要跟着更新
 	$scope.$on('users', function(e, users){
 		$scope.users = UserService.users;
+		$scope.ready = true;
 	});
 
 	//新增或编辑时的错误数据
