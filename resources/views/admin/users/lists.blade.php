@@ -29,7 +29,11 @@
             					<td ng-bind="user.name"></td>
             					<td ng-bind="user.user_role.role | roles"></td>
             					<td ng-bind="user.email"></td>
-            					<td>编辑、删除</td>
+            					<td>
+                                    <a ui-sref="users.edit({id: user.id})" ng-click="getUser(user.id)">编辑</a>
+                                    <span>/</span>
+                                    <span>删除</span>
+                                </td>
             				</tr>
             			</tbody>
 					</table>

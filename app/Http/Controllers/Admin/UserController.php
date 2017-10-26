@@ -96,4 +96,27 @@ class UserController extends Controller
         $users = User::with('userRole')->orderBy('users.created_at', 'desc')->paginate(5);
         return $users;
     }
+
+
+    /**
+     * 获取单个用户
+     * @return array [<description>]
+     * @author llz 2017/10/26 <[<email address>]>
+     */
+    public function getUser(Request $request)
+    {
+        $id = $request->get('id', null);
+        return User::with('userRole')->find($id);
+    }
+    
+
+    /**
+     * 编辑用户
+     * @author [name] <[<email address>]>
+     * @author llz 2017/10/26 <[<email address>]>
+     */
+    public function edit(Request $request)
+    {
+
+    }
 }

@@ -64,6 +64,9 @@ llz.controller('dashboardController', ['$scope', function($scope)
  */
 llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', '$location', 'UserService', function($scope, $http, $window, $stateParams, $location, UserService)
 {
+	//新增或编辑时的错误数据
+	$scope.errors = false;
+
 	//当前页的所有用户
 	$scope.users = {};
 	//用户分页
@@ -74,14 +77,42 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 		$scope.ready = true;
 	});
 
-	//新增或编辑时的错误数据
-	$scope.errors = false;
+	//编辑时的单个用户信息
+	$scope.user = {};
+	//在新标签中打开<a>连接
+	console.log($stateParams.user_id)
+	if($stateParams.user_id) {
+		UserService.getUser($stateParams.user_id);
+	}
+	//在当前页面中编辑，触发
+	$scope.getUser = function(id) {
+		UserService.getUser(id);
+	}
+	$scope.$on('user', function(e, user){
+		$scope.user = UserService.user;
+		console.log($scope.user);
+		$scope.ready = true;
+	});
+
+
 	//新增用户时候的数据保存
 	$scope.create_data = {};
 	//新增用户
 	$scope.create = function() {
 		$http.post('/api/user/create', $scope.create_data)
 			.then(function(res) {
+				$window.location.href = '/admin/users/lists';
+			}, function(res) {
+				var data = res.data;
+				//后台的验证，错误处理
+				$scope.errors = data;
+			});
+	}
+
+	$scope.edit = function() {
+		$http.post('/api/user/edit', $scope.user)
+			.then(function(res) {
+				console.log(res);return;
 				$window.location.href = '/admin/users/lists';
 			}, function(res) {
 				var data = res.data;

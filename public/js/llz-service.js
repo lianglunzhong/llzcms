@@ -75,6 +75,18 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 			})
 	}
 
+	//获取单个用户数据
+	userService.getUser = function(id) {
+		$http.post('/api/user/getUser', {id:id})
+			.then(function(res) {
+				if(res.data) {
+					userService.user = res.data;
+					//广播事件，即：当服务中的uers发生改变是，通知下级需要更新，下级使用$on监听;
+					$rootScope.$broadcast('user', userService.user);
+				}
+			})
+	}
+
 	//获取当前登录用户信息
 	userService.getAdmin = function() {
 		$http.post('/api/user/getAdmin', create_data)
@@ -83,11 +95,6 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 			})
 	}
 
-	//后台新增用户
-	userService.create = function(create_data) {
-		console.log(create_data);
-		return $http.post('/api/user/create', create_data)
-	}
 
 	return userService;
 }]);

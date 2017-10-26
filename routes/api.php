@@ -28,5 +28,7 @@ Route::group(['prifix' => 'api'], function() {
 		Route::post('/create', 'Admin\UserController@create');
 		//获取用户列表
 		Route::post('/getUsers', 'Admin\UserController@getUsers');
+		//获取单个用户
+		Route::post('/getUser', 'Admin\UserController@getUser');
 	});
 });

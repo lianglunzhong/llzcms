@@ -41,6 +41,11 @@ llz.config(['$interpolateProvider', '$stateProvider', '$urlRouterProvider','$loc
 			url: '/create',
 			templateUrl: '/admin/views/admin.users.create'
 		})
+		//编辑
+		.state('users.edit', {
+			url: '/edit/:user_id',
+			templateUrl: '/admin/views/admin.users.edit'
+		})
 
 		$locationProvider.html5Mode(true);
 	}
