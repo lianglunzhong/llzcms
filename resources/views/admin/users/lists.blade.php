@@ -30,7 +30,7 @@
             					<td ng-bind="user.user_role.role | roles"></td>
             					<td ng-bind="user.email"></td>
             					<td>
-                                    <a ui-sref="users.edit({id: user.id})" ng-click="getUser(user.id)">编辑</a>
+                                    <a ui-sref="users.edit({user_id: user.id})" ng-click="getUser(user.id)">编辑</a>
                                     <span>/</span>
                                     <span>删除</span>
                                 </td>

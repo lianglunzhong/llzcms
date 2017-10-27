@@ -112,8 +112,12 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 	$scope.edit = function() {
 		$http.post('/api/user/edit', $scope.user)
 			.then(function(res) {
-				console.log(res);return;
-				$window.location.href = '/admin/users/lists';
+				$scope.errors = false;
+				layui.use('layer', function(){
+				  	var layer = layui.layer;
+				  	layer.msg('update user success !');
+				}); 
+				// $window.location.href = '/admin/users/lists';
 			}, function(res) {
 				var data = res.data;
 				//后台的验证，错误处理

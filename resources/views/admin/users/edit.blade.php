@@ -57,16 +57,38 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- password -->
+                    
+                    <!-- new password -->
                     <div class="form-group">
-                        <label for="password" class="col-md-2 control-label">Reset Password</label>
+                        
+                        <div class="col-md-9 col-md-offset-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="user.reset">Reset password
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-if="user.reset"  ng-class="{'has-error': form.password.$touched && (form.password.$error.required || form.password.$error.minlength || form.password.$error.maxlength)}">
+                        <label for="password" class="col-md-2 control-label">New Password</label>
                         <div class="col-md-9">
                             <input id="password" 
                                     type="password" 
                                     class="form-control" 
                                     name="password"
-                                    ng-model="user.password">
+                                    ng-model="user.password"
+                                    ng-maxlength="24"
+                                    ng-minlength="6"
+                                    required>
+                            <div ng-if="form.password.$touched">
+                                <span ng-if="form.password.$error.required" class="help-block">
+                                    <strong >password is required !</strong>
+                                </span>
+                                <span ng-if="form.password.$error.maxlength || form.password.$error.minlength" class="help-block">
+                                    <strong>password must be between 6 and 24 !</strong>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 
@@ -74,7 +96,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Role</label>
                         <div class="col-md-9">
-                            <select class="form-control" ng-model="create_data.role">
+                            <select class="form-control" ng-model="user.user_role.role">
                                 <option value="1" ng-selected="user.user_role.role === 1">1: Auth</option>
                                 <option value="2" ng-selected="user.user_role.role === 2">2: Admin</option>
                                 <option value="3" ng-selected="user.user_role.role === 3">3: Super Admin</option>
@@ -95,10 +117,10 @@
                         </div>
                     </div>
                     
-                    <!-- cteate -->
+                    <!-- update -->
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
-                            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+                            <button type="submit" class="layui-btn" ng-disabled="form.$invalid">
                                 Update
                             </button>
                         </div>

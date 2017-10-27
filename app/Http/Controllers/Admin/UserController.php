@@ -117,6 +117,33 @@ class UserController extends Controller
      */
     public function edit(Request $request)
     {
+        $id = $request->get('id', null);
 
+        $this->validate($request, [
+            'name'      => 'required|min:2|max:16|unique:users,name,' . $id,
+            'email'     => 'required|email|max:255|unique:users,email,' . $id,
+        ]);
+
+        $data = $request->all();
+
+        $user = User::find($id);
+
+        if(isset($data['reset']))
+        {
+            $this->validate($request, [
+                'password' => 'required|min:6|max:24|',
+            ]);
+
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        }
+
+       if($user->update($data))
+       {
+            $user->userRole->update(['role' => $data['user_role']['role']]);
+
+            return response()->json(['msg' => 'update successfully']);
+       }
+
+        return response()->json(['msg' => 'update user info fail'], 422);
     }
 }
