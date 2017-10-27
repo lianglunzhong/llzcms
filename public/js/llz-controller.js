@@ -77,10 +77,19 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 		$scope.ready = true;
 	});
 
+	//获取用户列表数据
+	$scope.getPages = function(page) {
+		return UserService.getPages(page)
+	}
+
+	//获取用户列表数据
+	$scope.getLists = function(page) {
+		return UserService.getUsers(page)
+	}
+
 	//编辑时的单个用户信息
 	$scope.user = {};
-	//在新标签中打开<a>连接
-	console.log($stateParams.user_id)
+	//在新标签中打开<a>连接时，根据当前的参数去获取用户
 	if($stateParams.user_id) {
 		UserService.getUser($stateParams.user_id);
 	}
@@ -90,7 +99,6 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 	}
 	$scope.$on('user', function(e, user){
 		$scope.user = UserService.user;
-		console.log($scope.user);
 		$scope.ready = true;
 	});
 
@@ -123,5 +131,35 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 				//后台的验证，错误处理
 				$scope.errors = data;
 			});
+	}
+
+	$scope.hideDeleteModel = function() {
+		$scope.deleteModel = false;
+	}
+	$scope.showDeleteModel = function(user) {
+		$scope.deleteModel = true;
+		//把当前需要删除的用户信息赋给$scope.user,提交数据的时候直接提交该用户的id
+		$scope.user = user;
+	}
+	$scope.deleteUser = function() {
+		$scope.deleteModel = false;
+		//当前分页，删除成功后更新当前页数据
+		var page = $stateParams.page;
+		//删除用户
+		UserService.deleteUser($scope.user.id).then(function() {
+
+			UserService.getUsers(page)
+
+			layui.use('layer', function(){
+			  	var layer = layui.layer;
+			  	layer.msg('delete user success !');
+			});
+
+		}, function() {
+			layui.use('layer', function(){
+			  	var layer = layui.layer;
+			  	layer.msg('delete user fail !');
+			});
+		});
 	}
 }])

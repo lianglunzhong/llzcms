@@ -1,5 +1,8 @@
 
 <div class="row" ng-show="ready">
+    <!-- Confirm delete modal -->
+    <div delete-model ng-if="deleteModel" cancel="hideDeleteModel()" delete="deleteUser()"></div>
+
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<!-- panel heading -->
@@ -32,12 +35,12 @@
             					<td>
                                     <a ui-sref="users.edit({user_id: user.id})" ng-click="getUser(user.id)">编辑</a>
                                     <span>/</span>
-                                    <span>删除</span>
+                                    <span ng-click="showDeleteModel(user)" class="delete-model">删除</span>
                                 </td>
             				</tr>
             			</tbody>
 					</table>
-					<userpage></userpage>
+					<llzpage></llzpage>
             	</div>
             </div>
 		</div>

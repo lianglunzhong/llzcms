@@ -121,7 +121,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+                                <button type="submit" class="layui-btn" ng-disabled="form.$invalid">
                                     Register
                                 </button>
                                 <a class="btn btn-link" href="/admin/login" target="_self">

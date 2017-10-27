@@ -53,7 +53,7 @@
                 <a ui-sref="dashboard">Dashboard</a>
             </li>
             <li role="presentation" ng-class="{active: mainUrl == 'users'}">
-                <a ui-sref="users.lists">Users</a>
+                <a ui-sref="users.lists({page:1})">Users</a>
             </li>
             <li role="presentation" ng-class="{active: mainUrl == 'posts'}">
                 <a >Post</a>

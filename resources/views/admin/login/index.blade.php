@@ -81,7 +81,7 @@
 						
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button ng-disabled="form.$invalid" type="submit" class="btn btn-primary">
+                                <button ng-disabled="form.$invalid" type="submit" class="layui-btn">
                                     Login
                                 </button>
 

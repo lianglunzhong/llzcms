@@ -146,4 +146,18 @@ class UserController extends Controller
 
         return response()->json(['msg' => 'update user info fail'], 422);
     }
+
+
+    /**
+     * 删除用户
+     * @author llz 2017/10/27 <[<email address>]>
+     */
+    public function delete(Request $request)
+    {
+        $id = $request->get('id', null);
+
+        User::destroy($id);
+
+        return response()->json(['msg' => 'delete user successfully']);
+    }
 }

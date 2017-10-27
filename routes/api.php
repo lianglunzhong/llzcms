@@ -32,5 +32,7 @@ Route::group(['prifix' => 'api'], function() {
 		Route::post('/getUser', 'Admin\UserController@getUser');
 		//编辑用户
 		Route::post('/edit', 'Admin\UserController@edit');
+		//删除用户
+		Route::post('/delete', 'Admin\UserController@delete');
 	});
 });

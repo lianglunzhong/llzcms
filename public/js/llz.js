@@ -33,7 +33,7 @@ llz.config(['$interpolateProvider', '$stateProvider', '$urlRouterProvider','$loc
 		})
 		//用户列表
 		.state('users.lists', {
-			url: '/lists',
+			url: '/lists/:page',
 			templateUrl: '/admin/views/admin.users.lists'
 		})
 		//新增用户
@@ -61,9 +61,7 @@ llz.run(['$rootScope', '$state', '$window', '$location', '$log',
 	{
 		//$stateChangeSuccess- 当模板解析完成后触发
 		$rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-			console.log('stateChangeSuccess');
 			$rootScope.mainUrl = $location.url().split('/')[2];
-			console.log($rootScope.mainUrl);
 		});
 
 		//$stateChangeError- 当模板解析过程中发生错误时触发
