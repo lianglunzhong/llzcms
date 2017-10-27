@@ -114,8 +114,8 @@ llz.directive('llzpage', function($location, $stateParams)
 		template: '<div id="llzpage"></div>',
 		link: function($scope, ele, attrs, ctrl) {
 			//通过UserService服务获取分页数据
-			// var page = $location.search().page;
-			var page = $stateParams.page;
+			var page = $location.search().page;
+			// var page = $stateParams.page;
 			if(!page) {
 				page = 1;
 			}
@@ -133,8 +133,8 @@ llz.directive('llzpage', function($location, $stateParams)
 						curr:$scope.pages.current_page,  //起始页。一般用于刷新类型的跳页以及HASH跳页
 						jump: function(obj){  //点击分页时的回调函数
 							//改变url参数，但不刷新页面
-							// $location.search('page', obj.curr);
-							var url = '/admin/users/lists/' + obj.curr;
+							$location.search('page', obj.curr);
+							// var url = '/admin/users/lists/' + obj.curr;
 							// $location.url(url);
 							// History.pushState({}, null, url);
 

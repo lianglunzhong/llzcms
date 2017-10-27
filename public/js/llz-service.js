@@ -54,7 +54,6 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 					//广播事件，即：当服务中的uers发生改变是，通知下级需要更新，下级使用$on监听;
 					$rootScope.$broadcast('users', userService.users);
 				}
-				console.log(res);
 			})
 	}
 
@@ -69,7 +68,7 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 					userService.pages['per_page'] = res.data.per_page;
 					//用户总数
 					userService.pages['total'] = res.data.total;
-					console.log('pages')
+
 					return userService.pages;
 				}
 			})

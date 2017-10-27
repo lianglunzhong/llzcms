@@ -51,6 +51,16 @@ llz.controller('RegisterController', ['$scope', '$http', '$window', 'UserService
 
 
 /**
+ * 左侧导航栏控制器
+ */
+llz.controller('sidebarController', ['$scope', '$window', function($scope, $window) 
+{
+	$scope.toUser = function(){
+		$window.location.href = '/admin/users/lists?page=1';
+	}
+}]);
+
+/**
  * dashboard控制器
  */
 llz.controller('dashboardController', ['$scope', function($scope) 
@@ -144,7 +154,7 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 	$scope.deleteUser = function() {
 		$scope.deleteModel = false;
 		//当前分页，删除成功后更新当前页数据
-		var page = $stateParams.page;
+		var page = $location.search().page;
 		//删除用户
 		UserService.deleteUser($scope.user.id).then(function() {
 

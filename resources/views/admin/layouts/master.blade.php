@@ -47,13 +47,13 @@
         </div>
     </nav>
 
-    <div class="sidebar">
+    <div class="sidebar" ng-controller="sidebarController">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" ng-class="{active: mainUrl == 'dashboard'}">
                 <a ui-sref="dashboard">Dashboard</a>
             </li>
             <li role="presentation" ng-class="{active: mainUrl == 'users'}">
-                <a ui-sref="users.lists({page:1})">Users</a>
+                <a ui-sref="users.lists" ng-click="toUser()">Users</a>
             </li>
             <li role="presentation" ng-class="{active: mainUrl == 'posts'}">
                 <a >Post</a>

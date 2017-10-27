@@ -33,7 +33,7 @@ llz.config(['$interpolateProvider', '$stateProvider', '$urlRouterProvider','$loc
 		})
 		//用户列表
 		.state('users.lists', {
-			url: '/lists/:page',
+			url: '/lists',
 			templateUrl: '/admin/views/admin.users.lists'
 		})
 		//新增用户
