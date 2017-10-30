@@ -14,7 +14,24 @@
 			
 			<!-- panel body -->
             <div class="panel-body">
-            	<div class="count-search"></div>
+            	<div class="count-search">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span>23 Users</span>
+                        </div>
+                        <div class="col-md-4 filter">
+                            <span>Filter By : </span>
+                            <select class="form-control">
+                                <option value="1">Auth</option>
+                                <option value="2">Admin</option>
+                                <option value="3">Super Admin</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-md-offset-3">
+                            <input type="text" class="form-control" name="" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
 
             	<!-- data table -->
             	<div class="table-responsive">
@@ -40,8 +57,10 @@
             				</tr>
             			</tbody>
 					</table>
-					<llzpage></llzpage>
             	</div>
+
+                <!-- page -->
+                <llzpage></llzpage>
             </div>
 		</div>
 	</div>

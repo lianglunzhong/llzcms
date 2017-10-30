@@ -46,8 +46,8 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 	}
 
 	//获取用户列表数据
-	userService.getUsers = function(page=1) {
-		$http.post('/api/user/getUsers?page='+page)
+	userService.getUsers = function(conf) {
+		$http.post('/api/user/getUsers?page='+conf.page, conf)
 			.then(function(res) {
 				if(res.data) {
 					userService.users = res.data.data;
@@ -58,8 +58,9 @@ llz.service('UserService', ['$http', '$rootScope', function($http, $rootScope) {
 	}
 
 	//获取用户分页数据
-	userService.getPages = function(page=1) {
-		return $http.post('/api/user/getUsers?page='+page)
+	userService.getPages = function(conf) {
+		// return $http.post('/api/user/getUsers?page='+page)
+		return $http.post('/api/user/getUsers?page='+conf.page, conf)
 			.then(function(res) {
 				if(res.data) {
 					//当前页

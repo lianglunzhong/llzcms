@@ -88,13 +88,13 @@ llz.controller('userController', ['$scope', '$http', '$window', '$stateParams', 
 	});
 
 	//获取用户列表数据
-	$scope.getPages = function(page) {
-		return UserService.getPages(page)
+	$scope.getPages = function(conf) {
+		return UserService.getPages(conf)
 	}
 
 	//获取用户列表数据
-	$scope.getLists = function(page) {
-		return UserService.getUsers(page)
+	$scope.getLists = function(conf) {
+		return UserService.getUsers(conf)
 	}
 
 	//编辑时的单个用户信息

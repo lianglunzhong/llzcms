@@ -154,3 +154,10 @@ body {
 .layui-btn {
     border-radius: 5px;
 }
+.table-responsive {
+    height: 300px;
+}
+.filter select {
+    display: inline-block;
+    width: 50%;
+}

@@ -87,13 +87,22 @@ class UserController extends Controller
 
 
     /**
-     * 获取用户列表  -- 带分页
+     * 获取用户列表  -- 带分页和搜索
      * @return [type] [<description>]
      * @author llz 2017/10/25 <[<email address>]>
      */
     public function getUsers(Request $request)
-    {
-        $users = User::with('userRole')->orderBy('users.created_at', 'desc')->paginate(5);
+    {   
+        $data = $request->all();
+        if(isset($data['keyword']))
+        {
+            $users = User::where('name', 'like', '%' . $data['keyword'] . '%')
+                            ->orWhere('email', 'like', '%' . $data['keyword'] . '%')
+                            ->orderBy('users.created_at', 'desc')->paginate(5);
+        } else {
+            $users = User::with('userRole')->orderBy('users.created_at', 'desc')->paginate(5);
+        }
+
         return $users;
     }
 

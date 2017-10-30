@@ -113,14 +113,21 @@ llz.directive('llzpage', function($location, $stateParams)
 		restrict: 'AE',
 		template: '<div id="llzpage"></div>',
 		link: function($scope, ele, attrs, ctrl) {
-			//通过UserService服务获取分页数据
+			var conf = {};
+			//获取分页数据
 			var page = $location.search().page;
 			// var page = $stateParams.page;
 			if(!page) {
 				page = 1;
 			}
+			conf['page'] = page;
 
-			$scope.getPages(page).then(function(pages) {
+			var keyword = $location.search().keyword;
+			if(keyword) {
+				conf['keyword'] = keyword;
+			}
+
+			$scope.getPages(conf).then(function(pages) {
 				$scope.pages = pages;
 				layui.use('laypage', function(){
 					var laypage = layui.laypage;
@@ -138,8 +145,9 @@ llz.directive('llzpage', function($location, $stateParams)
 							// $location.url(url);
 							// History.pushState({}, null, url);
 
+							conf['page'] = obj.curr;
 							//获取当前分页的用户
-					      	$scope.getLists(obj.curr);
+					      	$scope.getLists(conf);
 					    }
 					});
 				});
